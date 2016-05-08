@@ -1,0 +1,36 @@
+" don't use viminfo file"
+set viminfo=
+
+" don't use swap file"
+set noswapfile
+
+" don't use backup file"
+set nobackup
+
+" enable highlight"
+syntax on
+
+"colorscheme slate
+" colorscheme solarized
+colorscheme molokai
+
+set background=dark
+" set background=light
+
+" setting IME behavior"
+set iminsert=0 imsearch=0
+inoremap <silent> <ESC> <ESC>
+
+" setting Font"
+set guifont=Migu_1M:h10
+
+" set visualbellだと、エラーのときに、ビープ音を出すのではなくて、画面をフラッシュさせるらしい。
+" で、さらに、t_vb= とすることで、その画面フラッシュもオフにさせるみたい。
+set visualbell t_vb=
+
+".gvimrc カラー設定
+"カラー設定した後にCursorIMを定義する方法
+if has('multi_byte_ime')
+    highlight Cursor guifg=NONE guibg=Green
+    highlight CursorIM guifg=NONE guibg=Purple
+endif
