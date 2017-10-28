@@ -1,3 +1,12 @@
+set encoding=utf-8
+scriptencoding utf-8
+" ↑1行目は読み込み時の文字コード
+" ↑2行目はVim Script内でマルチバイトを使う場合に設定する
+" Vim Scritptにvimrcも含まれるので、日本語でコメントを書く場合は先頭にこの設定が必要になる
+
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
