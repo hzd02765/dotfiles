@@ -1,3 +1,5 @@
+https://qiita.com/okamos/items/7f5461814e8ed8916870
+
 # dotfiles
 
 .（ドット）何とかってファイルを管理する方法です。
@@ -51,8 +53,10 @@ $ mv Brewfile dotfiles
 
 - Linux
 
-dotfilesLink.sh
+
 ```
+dotfilesLink.sh
+
 $ #!/bin/sh
 $ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 $ ln -sf ~/dotfiles/colors ~/.vim
@@ -64,8 +68,9 @@ $ ln -sf ~/dotfiles/Brewfile ~/Brewfile
 ```
 
 Windows(Linux系のファイルは入れないようにしてください。lnコマンドと比べターゲットとリンク先の指定が逆なので注意)
-mklink.bat
 ```
+mklink.bat
+
 mklink %HOMEPATH%"\.vimrc" %HOMEPATH%"\dotfiles\.vimrc"
 mklink /D %HOMEPATH%"\.vim\ftdetect" %HOMEPATH%"\dotfiles\ftdetect"
 mklink /D %HOMEPATH%"\.vim\indent" %HOMEPATH%"\dotfiles\indent"
@@ -73,10 +78,13 @@ mklink /D %HOMEPATH%"\.vim\colors" %HOMEPATH%"\dotfiles\colors"
 exit 0
 ```
 スクリプトを作りましたら、まずは動かしてみてください。
+
 シンボリックリンク(いわゆるショートカット)ができているかと思います。
+
 以降ほかの環境でgit cloneでGitHubから持ってきてスクリプトを動かす際、同名のファイルは消すか移動してから動かしましょう。(Winのみ)
 
 # 現在のディレクトリ構成
+
 こんな感じです。ただしcolors,ftdetect,indentは筆者の環境下での話になります。
 
 ```
@@ -103,8 +111,11 @@ dotfiles
           ruby.vim
           scss.vim
 ```
+
 # GitHubへのpush
+
 ここの説明がめんどくさいのでコマンドだけ、
+
 意味はcommitとpushしかできない人のためのgithubの使い方まとめを参照してみて。
 
 ```
@@ -118,6 +129,7 @@ $ git push origin master # type username & password
 下から２行目のyour_nameの部分は自身のgithubアカウント名ね。
 
 # 他のコンピュータからの取得
+
 他のコンピュータからgit cloneして設定を持ってきます。
 
 ```
@@ -125,7 +137,9 @@ $ cd ~/ # if windows use this > cd %HOMEPATH%
 $ git clone https://github.com/your_name/dotfiles.git
 $ sh dotfilesLink.sh # if windows use this > mklink.bat
 ```
+
 # 更新
+
 dotfilesのファイルを更新した際は更新をコミットした後にプッシュしてGitHubに送り込みます。
 
 ```
@@ -140,6 +154,7 @@ $ git commit -a -m "anything"
 $ git push origin master
 ```
 # 同期方法
+
 ↑の更新を取得する場合はGitHubの状態と一致させます。
 
 ```
@@ -147,6 +162,7 @@ $ git pull
 ```
 # 最後に
 なぜ.vim以下全てを持っていかないのか->私はなるべく最新のpluginなど使いたいですし、要らんものがいっぱいついてくるので必要最低限しかもっていきません。NeoBundleInstallで入るのですからいいのです。
+
 Windowsなら以前紹介したchocolateyの設定を入れて置くのもありだと思います。
 
 追記
