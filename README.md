@@ -38,16 +38,19 @@ $ mv Brewfile dotfiles
 ```
 
 ちなみに下３つは筆者は使っていない。
+
 みんなは使うのかなーとか思って入れてみただけです。
 
 実際のところこの部分はコマンドでやらずにFinderやエクスプローラーでやっても同じです。
 
 # シンボリックリンクを張る
+
 まぁいわゆるショートカットです。
+
 シェルスクリプトやバッチファイルにしちゃいます。(dotfilesディレクトリ内に作ってください。)
 
-Linux
-dotfilesLink.sh
+- Linux
+```dotfilesLink.sh
 $ #!/bin/sh
 $ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 $ ln -sf ~/dotfiles/colors ~/.vim
@@ -56,6 +59,8 @@ $ ln -sf ~/dotfiles/indent ~/.vim
 $ ln -sf ~/dotfiles/.bash_profile ~/.bash_profile
 $ ln -sf ~/dotfiles/.wgetrc ~/.wgetrc
 $ ln -sf ~/dotfiles/Brewfile ~/Brewfile
+```
+
 Windows(Linux系のファイルは入れないようにしてください。lnコマンドと比べターゲットとリンク先の指定が逆なので注意)
 mklink.bat
 mklink %HOMEPATH%"\.vimrc" %HOMEPATH%"\dotfiles\.vimrc"
