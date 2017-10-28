@@ -8,10 +8,10 @@
 - 終着点:環境設定がgit cloneによって一瞬で終わる。
 
 # GitHubにリポジトリを作成
-まずは何はともあれGitHub上にdotfilesリポジトリが必要です。
-サインインして右上の＋ボタンからnew repositoryを選択して、リポジトリを作成しましょう。
-先述したとおりdotfilesで作るのが主流みたいです。まぁなんでもいいけど。
-repository nameのところにdotfilesって入力して、create repositoryボタンを押せばできます。
+まずは何はともあれGitHub上にdotfilesリポジトリが必要です。  
+サインインして右上の＋ボタンからnew repositoryを選択して、リポジトリを作成しましょう。  
+先述したとおりdotfilesで作るのが主流みたいです。まぁなんでもいいけど。  
+repository nameのところにdotfilesって入力して、create repositoryボタンを押せばできます。  
 
 # 今まで管理していたファイルを移動
 ホームディレクトリにdotfilesディレクトリを作成して、管理対象のファイルやディレクトリをぶちこみます。
