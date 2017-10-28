@@ -50,6 +50,7 @@ $ mv Brewfile dotfiles
 シェルスクリプトやバッチファイルにしちゃいます。(dotfilesディレクトリ内に作ってください。)
 
 - Linux
+
 dotfilesLink.sh
 ```
 $ #!/bin/sh
