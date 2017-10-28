@@ -167,3 +167,5 @@ Windowsなら以前紹介したchocolateyの設定を入れて置くのもあり
 
 追記
 もっと自動化しましたミニマルに始めるDotfiles自動化計画
+
+https://qiita.com/okamos/items/40966158d0271ae7198b
