@@ -17,7 +17,7 @@ repository nameのところにdotfilesって入力して、create repositoryボ�
 ホームディレクトリにdotfilesディレクトリを作成して、管理対象のファイルやディレクトリをぶちこみます。
 下はmacの場合での例、自分で追加したいのとかいらないのとか取捨選択してね。
 
-'''
+```
 $ cd ~/
 $ mkdir dotfiles
 $ mv .vimrc dotfiles
@@ -27,7 +27,7 @@ $ mv .vim/indent dotfiles
 $ mv .bash_profile dotfiles
 $ mv .wgetrc dotfiles
 $ mv Brewfile dotfiles
-'''
+```
 
 ちなみに下３つは筆者は使っていない。
 みんなは使うのかなーとか思って入れてみただけです。
