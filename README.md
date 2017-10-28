@@ -1,7 +1,4 @@
 # dotfiles
-dotfiles
-
-dotfiles
 .（ドット）何とかってファイルを管理する方法です。
 .vimrc,.vim,.bash_profile,.wgetrc何でも来たれです。
 
@@ -9,13 +6,14 @@ dotfiles
 前提条件:ドットファイルの設定を行っていること。GitHubについての基礎の基礎知識がある。
 必要なソフト:git
 終着点:環境設定がgit cloneによって一瞬で終わる。
-GitHubにリポジトリを作成
+
+# GitHubにリポジトリを作成
 まずは何はともあれGitHub上にdotfilesリポジトリが必要です。
 サインインして右上の＋ボタンからnew repositoryを選択して、リポジトリを作成しましょう。
 先述したとおりdotfilesで作るのが主流みたいです。まぁなんでもいいけど。
 repository nameのところにdotfilesって入力して、create repositoryボタンを押せばできます。
 
-今まで管理していたファイルを移動
+# 今まで管理していたファイルを移動
 ホームディレクトリにdotfilesディレクトリを作成して、管理対象のファイルやディレクトリをぶちこみます。
 下はmacの場合での例、自分で追加したいのとかいらないのとか取捨選択してね。
 
@@ -33,7 +31,7 @@ $ mv Brewfile dotfiles
 
 実際のところこの部分はコマンドでやらずにFinderやエクスプローラーでやっても同じです。
 
-シンボリックリンクを張る
+# シンボリックリンクを張る
 まぁいわゆるショートカットです。
 シェルスクリプトやバッチファイルにしちゃいます。(dotfilesディレクトリ内に作ってください。)
 
@@ -58,7 +56,7 @@ exit 0
 シンボリックリンク(いわゆるショートカット)ができているかと思います。
 以降ほかの環境でgit cloneでGitHubから持ってきてスクリプトを動かす際、同名のファイルは消すか移動してから動かしましょう。(Winのみ)
 
-現在のディレクトリ構成
+# 現在のディレクトリ構成
 こんな感じです。ただしcolors,ftdetect,indentは筆者の環境下での話になります。
 
 dotfiles
@@ -83,7 +81,7 @@ dotfiles
           javascript.vim
           ruby.vim
           scss.vim
-GitHubへのpush
+# GitHubへのpush
 ここの説明がめんどくさいのでコマンドだけ、
 意味はcommitとpushしかできない人のためのgithubの使い方まとめを参照してみて。
 
@@ -95,13 +93,13 @@ $ git remote add origin git://github.com/your_name/dotfiles.git
 $ git push origin master # type username & password
 下から２行目のyour_nameの部分は自身のgithubアカウント名ね。
 
-他のコンピュータからの取得
+# 他のコンピュータからの取得
 他のコンピュータからgit cloneして設定を持ってきます。
 
 $ cd ~/ # if windows use this > cd %HOMEPATH%
 $ git clone https://github.com/your_name/dotfiles.git
 $ sh dotfilesLink.sh # if windows use this > mklink.bat
-更新
+# 更新
 dotfilesのファイルを更新した際は更新をコミットした後にプッシュしてGitHubに送り込みます。
 
 $ git add .
@@ -111,11 +109,11 @@ $ git push origin master
 
 $ git commit -a -m "anything"
 $ git push origin master
-同期方法
+# 同期方法
 ↑の更新を取得する場合はGitHubの状態と一致させます。
 
 $ git pull
-最後に
+# 最後に
 なぜ.vim以下全てを持っていかないのか->私はなるべく最新のpluginなど使いたいですし、要らんものがいっぱいついてくるので必要最低限しかもっていきません。NeoBundleInstallで入るのですからいいのです。
 Windowsなら以前紹介したchocolateyの設定を入れて置くのもありだと思います。
 
