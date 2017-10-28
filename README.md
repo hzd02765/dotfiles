@@ -50,7 +50,7 @@ $ mv Brewfile dotfiles
 シェルスクリプトやバッチファイルにしちゃいます。(dotfilesディレクトリ内に作ってください。)
 
 - Linux
-```bash:dotfilesLink.sh
+```php:dotfilesLink.sh
 $ #!/bin/sh
 $ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 $ ln -sf ~/dotfiles/colors ~/.vim
