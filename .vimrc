@@ -333,7 +333,7 @@ nnoremap <silent> ,ut :<C-u>Unite tab<CR>
 "----------------------------------------------------------
 set tags=tags
 " ctagsのコマンド
-let Tlist_Ctags_Cmd = $HOME."/local/bin/ctags"
+" let Tlist_Ctags_Cmd = $HOME."/local/bin/ctags"
 " 現在表示中のファイルのみのタグしか表示しない
 let Tlist_Show_One_File = 1
 " 右側にtag listのウインドうを表示する
