@@ -213,19 +213,19 @@ source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
-" 挿入モードでクリップボードからペーストする時に自動でインデントさせないようにする
-if &term =~ "xterm"
-    let &t_SI .= "\e[?2004h"
-    let &t_EI .= "\e[?2004l"
-    let &pastetoggle = "\e[201~"
-
-    function XTermPasteBegin(ret)
-        set paste
-        return a:ret
-    endfunction
-
-    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-endif
+" " 挿入モードでクリップボードからペーストする時に自動でインデントさせないようにする
+" if &term =~ "xterm"
+"     let &t_SI .= "\e[?2004h"
+"     let &t_EI .= "\e[?2004l"
+"     let &pastetoggle = "\e[201~"
+"
+"     function XTermPasteBegin(ret)
+"         set paste
+"         return a:ret
+"     endfunction
+"
+"     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+" endif
 
 "-------------------------------------------------------------------------------
 " vimrc help
@@ -255,23 +255,25 @@ nnoremap <silent> ,bb :b#<CR>
 "----------------------------------------------------------
 " Syntastic
 "----------------------------------------------------------
-" 構文エラー行に「>>」を表示
+" " 構文エラー行に「>>」を表示
 " let g:syntastic_enable_signs = 1
-" 他のVimプラグインと競合するのを防ぐ
+" " 他のVimプラグインと競合するのを防ぐ
 " let g:syntastic_always_populate_loc_list = 1
-" 構文エラーリストを表示
+" " 構文エラーリストを表示
 " let g:syntastic_auto_loc_list = 1
-" ファイルを開いた時に構文エラーチェックを実行する
+" " ファイルを開いた時に構文エラーチェックを実行する
 " let g:syntastic_check_on_open = 1
-" 「:wq」で終了する時も構文エラーチェックする
+" " 「:wq」で終了する時も構文エラーチェックする
 " let g:syntastic_check_on_wq = 1
 
 " Javascript用. 構文エラーチェックにESLintを使用
-"let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_checkers=['eslint']
 " Javascript以外は構文エラーチェックをしない
-"let g:syntastic_mode_map = { 'mode': 'passive',
-"                           \ 'active_filetypes': ['javascript'],
-"                           \ 'passive_filetypes': [] }
+" let g:syntastic_mode_map = {
+"             \ 'mode': 'active',
+"             \ 'active_filetypes': ['javascript'],
+"             \ 'passive_filetypes': []
+"             \ }
 
 " Python3用
 " let g:syntastic_python_python_exec = '/usr/bin/python3'
@@ -324,7 +326,9 @@ endif
 " Unite.vim
 "-----------------------------------------------------------
 " 入力モードで開始する 0 -> nomal, 1 -> insert
-let g:unite_enable_start_insert=1
+let g:unite_enable_start_insert=0
+" let g:unite_enable_start_insert=1
+
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
 " ヤンクの履歴 -> Unite.vimからunite-history/yankが分離してneoyank.vimになった
@@ -389,47 +393,47 @@ endif
 "----------------------------------------------------------
 " タブ
 "----------------------------------------------------------
-" Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
-
-" Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
-
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap    t [Tag]
-" Tab jump
-for n in range(1, 9)
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
-
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
+" " Anywhere SID.
+" function! s:SID_PREFIX()
+"   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+" endfunction
+"
+" " Set tabline.
+" function! s:my_tabline()  "{{{
+"   let s = ''
+"   for i in range(1, tabpagenr('$'))
+"     let bufnrs = tabpagebuflist(i)
+"     let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+"     let no = i  " display 0-origin tabpagenr.
+"     let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+"     let title = fnamemodify(bufname(bufnr), ':t')
+"     let title = '[' . title . ']'
+"     let s .= '%'.i.'T'
+"     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+"     let s .= no . ':' . title
+"     let s .= mod
+"     let s .= '%#TabLineFill# '
+"   endfor
+"   let s .= '%#TabLineFill#%T%=%#TabLine#'
+"   return s
+" endfunction "}}}
+" let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+" set showtabline=2 " 常にタブラインを表示
+"
+" " The prefix key.
+" nnoremap    [Tag]   <Nop>
+" nmap    t [Tag]
+" " Tab jump
+" for n in range(1, 9)
+"   execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+" endfor
+" " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+"
+" map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" " tc 新しいタブを一番右に作る
+" map <silent> [Tag]x :tabclose<CR>
+" " tx タブを閉じる
+" map <silent> [Tag]n :tabnext<CR>
+" " tn 次のタブ
+" map <silent> [Tag]p :tabprevious<CR>
+" " tp 前のタブ
