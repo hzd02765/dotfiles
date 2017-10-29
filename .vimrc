@@ -61,6 +61,9 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('Shougo/neomru.vim')
   " Unite.vimで最近使ったyankを表示できるようにする
   call dein#add('Shougo/neoyank.vim')
+  
+  " 関数表示
+  call dein#add('vim-scripts/taglist.vim')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
