@@ -13,7 +13,7 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
 if dein#load_state('~/.vim/bundle')
@@ -21,7 +21,7 @@ if dein#load_state('~/.vim/bundle')
 
   " Let dein manage dein
   " Required:
-  call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
 
@@ -61,7 +61,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('Shougo/neomru.vim')
   " Unite.vimで最近使ったyankを表示できるようにする
   call dein#add('Shougo/neoyank.vim')
-  
+
   " 関数表示
   call dein#add('vim-scripts/taglist.vim')
 
@@ -88,14 +88,17 @@ syntax enable
 " カラースキーム
 "----------------------------------------------------------
 set t_Co=256
-" syntax enable " 構文に色を付ける
 
 """ colorscheme molokai
-if &term == "xterm-256color"
-    colorscheme molokai
-    hi Comment ctermfg=102
-    hi Visual  ctermbg=236
-endif
+" if &term == "xterm-256color"
+"     colorscheme molokai
+"     hi Comment ctermfg=102
+"     hi Visual  ctermbg=236
+" endif
+
+colorscheme molokai
+hi Comment ctermfg=102
+hi Visual  ctermbg=236
 
 "-------------------------------------------------------------------------------
 " File
