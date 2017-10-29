@@ -7,6 +7,15 @@ scriptencoding utf-8
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
 
+" install -> dein.vim
+"
+" Run below script.
+" $ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" $ sh ./installer.sh {specify the installation directory}
+"
+" Open vim and install dein
+" :call dein#install()
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
