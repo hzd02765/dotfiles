@@ -199,10 +199,11 @@ nnoremap <up> gk
 
 " バックスペースキーの有効化
 set backspace=indent,eol,start
+
 " <esc>キーを<Ctrl + j>に割り当て
-" imap <C-j> <esc>
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
+inoremap <C-j> <esc>
 
 "----------------------------------------------------------
 " カッコ・タグの対応
