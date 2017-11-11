@@ -77,6 +77,9 @@ if dein#load_state('~/.vim/bundle')
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
+  " 閉じ括弧を補完するプラグイン
+  call dein#add('cohama/lexima.vim')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -205,6 +208,17 @@ noremap <C-j> <esc>
 noremap! <C-j> <esc>
 inoremap <C-j> <esc>
 
+" 改行（空行）を挿入する
+" nnoremap <CR> :<C-u>call append(expand('.'), '')<Cr>j
+nnoremap <CR> o<Esc>
+
+" インサートモードで行頭や行末へ移動
+
+"行頭へ移動
+inoremap <C-a> <C-o>^
+"行末へ移動
+inoremap <C-e> <C-o>$
+
 "----------------------------------------------------------
 " カッコ・タグの対応
 "----------------------------------------------------------
@@ -227,6 +241,9 @@ source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 "
 "     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 " endif
+
+" insertモード解除時に :set nopaste
+autocmd InsertLeave * set nopaste
 
 "-------------------------------------------------------------------------------
 " vimrc help
