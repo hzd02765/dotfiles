@@ -616,6 +616,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(howm-view-use-grep nil)
  '(org-startup-folded nil)
  '(tab-width 8)
  '(tabbar-mode t nil (tabbar)))
@@ -652,8 +653,6 @@
 	(lambda ()(howm-menu))
 )
 
-
-
 ;;case 2: はじめて C-c , , した時に読み込む
 ;(global-set-key "\C-c,," 'howm-menu)
 ;(autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
@@ -678,7 +677,7 @@
 ;             howm-keyword-to-kill-ring))
 
 ;;howmメモ保存の場所
-(setq howm-directory(concat user-emacs-directory "/../../c/Users/win10/Dropbox/howm"))
+(setq howm-directory(concat user-emacs-directory "/../../c/Users/win10/Dropbox/howm/"))
 ;; キーワード一覧
 (setq howm-keyword-file (concat howm-directory ".howm-keys"))
 ;; 履歴一覧
@@ -690,7 +689,7 @@
 (setq howm-file-name-format "%Y/%m/%Y-%m-%d-%H%M%S.txt")
 
 ;; 表示する個数
-(setq howm-menu-recent-num 30)
+(setq howm-menu-recent-num 100)
 
 ;;M-x calendar で好きな日付けを選び，RETとします
 (eval-after-load "calendar"
@@ -707,7 +706,7 @@
                     (calendar-cursor-to-date t)))
          (exit-calendar)
          (insert day)))))
-
+         
 ;;今日の日付けの簡易入力
 (defun my-get-date-gen (form)(insert (format-time-string form)))
 (defun my-get-date ()(interactive)(my-get-date-gen "[%Y-%m-%d]"))
@@ -721,6 +720,7 @@
 ;; RET でファイルを開く際, 一覧バッファを消す
 ;; C-u RET なら残る
 (setq howm-view-summary-persistent nil)
+
 ;; いちいち消すのも面倒なので
 ;; 内容が 0 ならファイルごと削除する
 (if (not (memq 'delete-file-if-no-contents after-save-hook))
@@ -733,12 +733,13 @@
          (= (point-min) (point-max)))
     (delete-file
      (buffer-file-name (current-buffer)))))
+     
 ;;C-c C-c → 現バッファの内容を保存してバッファを消す
 (defun my-save-and-kill-buffer ()
   (interactive)
   (save-buffer)
   (kill-buffer nil)
-  (howm-menu)
+;  (howm-menu)
 )
 (eval-after-load "howm"
   '(progn
@@ -766,8 +767,8 @@
 ;; 強調表示
 (add-hook 'howm-mode-hook
    (lambda ()
-     ;(highlight-phrase "{_}" 'hi-green)
-     (highlight-phrase "{_}" 'hi-blue)
+     (highlight-phrase "{_}" 'hi-green)
+     (highlight-phrase "{ }" 'hi-blue)
    ))
 
 ;(font-lock-add-keywords
@@ -775,6 +776,16 @@
 ;    '(("!" . font-lock-warning-face)
 ;    ("hoge" . font-lock-keyword-face)
 ;    ("[0-9]+" . font-lock-constant-face)))
+
+;; 「ほげ」と「[ふが]」に着色
+;; ・設定法の詳細は, 変数 font-lock-keywords のヘルプを参照
+;; ・face の一覧は M-x list-faces-display
+;(setq howm-user-font-lock-keywords
+;  '(
+;    ("ほげ" . (0 'highlight prepend))
+;    ("\\[ふが\\]" . (0 'font-lock-doc-face prepend))
+;    ))
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ モードの切り替え                                              ;;;
@@ -819,3 +830,44 @@
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 (global-set-key (kbd "C-c <up>")    'windmove-up)
 (global-set-key (kbd "C-c <down>")  'windmove-down)
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ Emacsのnext-buffer/previous-bufferで*(アスタリスク)を含むbufferを飛ばす
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+(defun asterisked? (buf-name)
+  (= 42 (car (string-to-list buf-name))))
+
+(defun move-to-scratch ()
+  (interactive)
+  (let ((current-buffer-name (buffer-name)))
+    (next-buffer)
+    (while (and (not (string= "*scratch*" (buffer-name)))
+                (not (string= current-buffer-name (buffer-name))))
+      (next-buffer))))
+
+(defun next-buffer-with-skip* ()
+  (interactive)
+  (let ((current-buffer-name (buffer-name)))
+    (next-buffer)
+    (while (and (asterisked? (buffer-name))
+                (not (string= current-buffer-name (buffer-name))))
+      (next-buffer))))
+
+(defun previous-buffer-with-skip* ()
+  (interactive)
+  (let ((current-buffer-name (buffer-name)))
+    (previous-buffer)
+    (while (and (asterisked? (buffer-name))
+                (not (string= current-buffer-name (buffer-name))))
+      (previous-buffer))))
+      
+(global-set-key (kbd "C-<prior>") 'previous-buffer-with-skip*)
+;(global-set-key (kbd "C-<prior>") 'previous-buffer)
+(global-set-key (kbd "C-<next>") 'next-buffer-with-skip*)
+;(global-set-key (kbd "C-<next>") 'next-buffer)
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ ウィンドウの切り替え                                          ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+(global-set-key (kbd "C-<tab>") 'other-window)
